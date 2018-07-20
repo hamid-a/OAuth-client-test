@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+Route::post('/oauth-login', 'Auth\OauthController@login')->name('oauth-login');
+Route::get('/oauth/callback', 'Auth\OauthController@callback')->name('oauth-callback');
+
+Route::get('admin', function () {
+    return 'Admin Area';
+})->name('admin_panel')->middleware('admin-access');
+
+Route::get('dashboard', function () {
+    return 'Dashboard Area';
+})->name('user_panel')->middleware('panel-access');

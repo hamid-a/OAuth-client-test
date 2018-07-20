@@ -5,20 +5,21 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class PanelAccess
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/dashboard');
+        //If request does not comes from logged in admin
+        //then he shall be redirected to Admin Login page
+        if (!Auth::user()->can('dashboard-access')) {
+            return redirect('/login');
         }
 
         return $next($request);
