@@ -16,8 +16,8 @@ class AdminAccess
      */
     public function handle($request, Closure $next)
     {
-        //If request does not comes from logged in admin
-        //then he shall be redirected to Admin Login page
+        // If request does not comes from logged in users with admin access
+        // then he shall be redirected to Login page
         if (!Auth::user()->can('admin-access')) {
             return redirect('/login');
         }

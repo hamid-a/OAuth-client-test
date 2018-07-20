@@ -16,8 +16,8 @@ class PanelAccess
      */
     public function handle($request, Closure $next)
     {
-        //If request does not comes from logged in admin
-        //then he shall be redirected to Admin Login page
+        // If request does not comes from logged in users
+        // then he shall be redirected to Login page
         if (!Auth::user()->can('dashboard-access')) {
             return redirect('/login');
         }

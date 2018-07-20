@@ -16,13 +16,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::post('/oauth-login', 'Auth\OauthController@login')->name('oauth-login');
 Route::get('/oauth/callback', 'Auth\OauthController@callback')->name('oauth-callback');
 
 Route::get('admin', function () {
-    return 'Admin Area';
+    return view('admin');
 })->name('admin_panel')->middleware('admin-access');
 
 Route::get('dashboard', function () {
-    return 'Dashboard Area';
-})->name('user_panel')->middleware('panel-access');
+    return view('dashboard');
+})->name('dashboard_panel')->middleware('panel-access');

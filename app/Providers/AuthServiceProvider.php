@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // we need two gate for authorizing two level of users
+        // authorize users with access attribute in users collection
         Gate::define('admin-access', function($user) {
             return $user->access == 1;
         });
